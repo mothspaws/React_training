@@ -270,7 +270,7 @@ function App() {
       <h2>Vyběr si něco dobrého</h2>
       <div className="recipe-list">
         {recipes.recipes.map((recipe) => (
-          <div key={recipe.id} className="recipe">
+          <><div key={recipe.id} className="recipe">
             <h3>{recipe.name}</h3>
             <img src={recipe.imgUri} alt={recipe.name} />
             <p>{recipe.description}</p>
@@ -280,6 +280,8 @@ function App() {
               ))}
             </ul>
           </div>
+            <span className="separator"># # # # # # # # # # # # # # #</span>
+          </>
         ))}
       </div>
     </div>
