@@ -1,4 +1,5 @@
 import './App.css';
+import RecipeList from './components/RecipeList';
 
 const recipes = {
   name: "Babiččiny recepty",
@@ -259,6 +260,279 @@ const recipes = {
         }
       ],
       "id": "2dd281dff25fe765"
+    },
+    {
+      "name": "Drůbeží paštika s vepřovými kousky",
+      "description": "Játra důkladně očistěte. Odkrojky z vepřového rozmixujte do hladka. Přidejte očištěná játra, koření, víno, bylinky, sůl, pepř, česnek, šalotku, 100 g másla a rozmixujte do hladka. Rozmixovanou směsí naplňte menší zavařovací skleničky nebo hřbet vyložený folií. Vložte do pekáčku, podlijte asi 3 cm vody a dejte péct do trouby na 100 °C asi 50 minut. Mezitím si připravte bylinkové máslo na zalití paštiky. Máslo rozpusťte na mírném ohni a následně rozmixujte s medvědím česnekem (stačí polovina, zbytek použijte na ozdobu). Zkontrolujte paštiku. Správně upečená by měla být pěkně růžová. Pokud je hotová, zalijte ji zeleným máslem a dejte chladit na několik hodin, nejlépe do druhého dne. Podávejte s krajícem rozpečeného chleba a čerstvými listy medvědího česneku.",
+      "imgUri": "https://zachranjidlo.cz/wp-content/uploads/pastika-1024x493-1200x500-c-default.png",
+      "ingredients": [
+        {
+          "id": "778400b335f3cf0a",
+          "amount": 150,
+          "unit": "g"
+        },
+        {
+          "id": "0b3a78414e196585",
+          "amount": 100,
+          "unit": "g"
+        },
+        {
+          "id": "6740ae2c9acfa794",
+          "amount": 200,
+          "unit": "g"
+        },
+        {
+          "id": "2220a6eb35e31dc6",
+          "amount": 1,
+          "unit": "ks"
+        },
+        {
+          "id": "97f5d8e88343e612",
+          "amount": 50,
+          "unit": "g"
+        },
+        {
+          "id": "4a17d47da9503363",
+          "amount": 4,
+          "unit": "lžíce"
+        },
+        {
+          "id": "87dbea8746ecb15d",
+          "amount": 1,
+          "unit": "ks"
+        },
+        {
+          "id": "ce185eb2e7ad2e7c",
+          "amount": 3,
+          "unit": "snítka"
+        },
+        {
+          "id": "a088b01b2dc1bd5a",
+          "amount": 0.5,
+          "unit": "lžičky"
+        },
+        {
+          "id": "3f702872fb8e99f8",
+          "amount": 1,
+          "unit": "špetka"
+        },
+        {
+          "id": "cd99517791018390",
+          "amount": 1,
+          "unit": "špetka"
+        },
+        {
+          "id": "bc6da7a1358c36ca",
+          "amount": 4,
+          "unit": "plátky"
+        }
+      ],
+      "id": "a771ee4c1359b270"
+    },
+    {
+      "name": "Cuketové závitky s chlebovým parmazánem",
+      "description": "Ztvrdlý chleba nalámejte a nasekejte nožem najemno, podrťte v hmoždíři nebo rozmixujte. Směs vsypte na rozehřátou pánev a přidejte sůl, cukr a ocet. Za stálého míchání pražte 2 minuty. Přilijte olej a směs dále míchejte 3–5 minut, až „parmazán” zezlátne. Poté ho nechte vychladnout. Cukety nakrájejte podélně na tenké plátky (cca 0,5 cm, ne více). Plátky z obou stran lehce posolte a nechte je alespoň 15 minut “vypotit”. Plátky cukety osušte a na rozpálené pánvi s trochou olivového oleje opečte z každé strany dozlatova. Dle chuti můžete přidat čerstvý pepř. Cuketu nechejte zchladnout, každý plátek namažte tenkou vrstvou žervé a posypte chlebovým parmazánem. Na jeden konec plátku dejte pár lístků rukoly, bylinek či jiných natí tak, aby stonky ležely na okraji plátku a lístky na druhé straně trošku vyčnívaly. Srolujte ze strany, kde leží bylinky, do závitku a podávejte jako předkrm nebo jednohubku.",
+      "imgUri": "https://zachranjidlo.cz/wp-content/uploads/zavitky-1024x493-1200x500-c-default.png",
+      "ingredients": [
+        {
+          "id": "4a02c5f42ed2a50e",
+          "amount": 100,
+          "unit": "g"
+        },
+        {
+          "id": "3f702872fb8e99f8",
+          "amount": 0.5,
+          "unit": "lžičky"
+        },
+        {
+          "id": "a52eee7ee4336b50",
+          "amount": 0.5,
+          "unit": "lžičky"
+        },
+        {
+          "id": "c34d54075cd88e29",
+          "amount": 0.5,
+          "unit": "lžičky"
+        },
+        {
+          "id": "5cfea498406de1b7",
+          "amount": 2,
+          "unit": "lžíce"
+        },
+        {
+          "id": "0031332354e31780",
+          "amount": 2,
+          "unit": "ks"
+        },
+        {
+          "id": "f6928ce8390a5980",
+          "amount": 200,
+          "unit": "g"
+        },
+        {
+          "id": "97f5d8e88343e612",
+          "amount": 1,
+          "unit": "hrst"
+        },
+        {
+          "id": "3f702872fb8e99f8",
+          "amount": 1,
+          "unit": "špetka"
+        },
+        {
+          "id": "cd99517791018390",
+          "amount": 1,
+          "unit": "špetka"
+        }
+      ],
+      "id": "508200e97ac04f80"
+    },
+    {
+      "name": "Focaccia s olejem ze sušených rajčat",
+      "description": "Ve větší míse smíchejte vodu a droždí a nechejte pár minut stát, aby se droždí aktivovalo. Do mísy postupně přisypávejte mouku a sůl a míchejte, dokud nevznikne hladké těsto. Přikryjte utěrkou a nechejte v teple kynout alespoň 1 hodinu. Vykynuté těsto přendejte na pomoučenou plochu a rozdělte jej na dvě poloviny. Oba bochánky přendejte na plech vyložený pečícím papírem a rozprostřete do silnější placky. Pokapejte olejem, můžete přidat i kousky sušených rajčat, bylinky nebo pár oliv. Olej důkladně rozetřete pomocí rukou a prsty promačkejte, aby v placce vznikly mírné prohlubně. Posypejte hrubou solí a pečte na 250 °C asi 10-12 minut do zlatohněda.",
+      "imgUri": "https://zachranjidlo.cz/wp-content/uploads/dsc02208-1024x426-1200x500-c-default.jpg",
+      "ingredients": [
+        {
+          "id": "13490a01e0f59a28",
+          "amount": 500,
+          "unit": "g"
+        },
+        {
+          "id": "806c0d1dd61a7a08",
+          "amount": 400,
+          "unit": "ml"
+        },
+        {
+          "id": "3ac376e95dcbc246",
+          "amount": 0.5,
+          "unit": "ks"
+        },
+        {
+          "id": "3f702872fb8e99f8",
+          "amount": 1,
+          "unit": "lžíce"
+        },
+        {
+          "id": "af691554e6c7feed",
+          "amount": 4,
+          "unit": "lžíce"
+        }
+      ],
+      "id": "2b7dae44b479363a"
+    },
+    {
+      "name": "Katalánské zeleninové karbanátky se slaninou",
+      "description": "Brambory oloupejte, nakrájejte na kostky a uvařte v osolené vodě doměkka. Kapustu zbavte vnějších ovadlých listů, vnitřní nasekejte na nudličky. Česnek oloupejte a nakrájejte na tenké plátky. Z uzeniny odkrojte případnou kůži nebo sloupněte slupku a nakrájejte ji na silnější plátky (asi 3–5 mm). Jakmile jsou brambory uvařené, slijte polovinu vody, vsypte k nim kapustu, nechte ji 1 minutu spařit a slijte zbylou vodu. Brambory rozmačkejte šťouchadlem nebo vařečkou a promíchejte s kapustou. Na horké pánvi opečte plátky uzeniny dozlatova z obou stran. Opatrně ji vyjměte, ale vypečený tuk ponechte v pánvi. Ve vypečeném tuku orestujte česnek dozlatova. Přidejte brambory s kapustou a opečte je ze všech stran. Z bramborové směsi můžete tvořit placičky a opékat je dozlatova z obou stran. Podávejte s plátky uzeniny. Místo uzeniny můžete použít zbylé pečené maso, hodí se tučnější části jako bůček, krkovice, ale i řízek. Pokud maso nemá dostatek tuku, opečte ho na 1–2 lžících sádla.",
+      "imgUri": "https://zachranjidlo.cz/wp-content/uploads/katalanske_karbanatky-1024x427-1200x500-c-default.png",
+      "ingredients": [
+        {
+          "id": "9f02cb91fe08ee88",
+          "amount": 500,
+          "unit": "g"
+        },
+        {
+          "id": "0f98ae783ce9be76",
+          "amount": 0.25,
+          "unit": "hlávky"
+        },
+        {
+          "id": "bf0da9e7fe070b99",
+          "amount": 200,
+          "unit": "g"
+        },
+        {
+          "id": "3f702872fb8e99f8",
+          "amount": 1,
+          "unit": "špetka"
+        }
+      ],
+      "id": "f00a783bfd2de513"
+    },
+    {
+      "name": "Francouzský rajčatový koláč",
+      "description": "Rajčata nakrájejte na tlustší plátky, posolte z obou stran a nechte alespoň hodinu v pokojové teplotě, aby pustila část šťávy. Koláčovou formu vyložte pečícím papírem nebo vymažte máslem a vysypte moukou. Listové těsto rozválejte, vyložte jím formu a dno propíchejte vidličkou. Na těsto rovnoměrně rozetřete hořčici. Pokud jsou rajčata hodně šťavnatá, nebo jste neměli čas nechat pustit jejich šťávu, posypte hořčici trochou strouhanky. Na dno koláče rozprostřete plátky rajčat, pokapejte olivovým olejem a přidejte trošku soli a čerstvě namletého pepře. Koláč vložte do trouby rozehřáté na 220°C a pečte asi 35 minut, dokud okraje koláče nezezlátnou. Nechejte koláč mírně zchladnout, ozdobte jej lístky bazalky a podávejte ho ještě teplý či za studena.",
+      "imgUri": "https://zachranjidlo.cz/wp-content/uploads/img_6491-1024x414-1200x500-c-default.jpg",
+      "ingredients": [
+        {
+          "id": "cd363625e6b6df65",
+          "amount": 300,
+          "unit": "g"
+        },
+        {
+          "id": "b08135ccef590fd6",
+          "amount": 5,
+          "unit": "ks"
+        },
+        {
+          "id": "98a317455a114d54",
+          "amount": 2,
+          "unit": "lžíce"
+        },
+        {
+          "id": "157003980c0a437a",
+          "amount": 2,
+          "unit": "lžíce"
+        },
+        {
+          "id": "5cfea498406de1b7",
+          "amount": 1,
+          "unit": "lžíce"
+        },
+        {
+          "id": "3f702872fb8e99f8",
+          "amount": 1,
+          "unit": "špetka"
+        },
+        {
+          "id": "cd99517791018390",
+          "amount": 1,
+          "unit": "špetka"
+        }
+      ],
+      "id": "62cee1045b85cdda"
+    },
+    {
+      "name": "Skořicové hranolky z chleba",
+      "description": "Zbylý chleba nakrájejte na malé hranoly. Smíchejte rozkvedlaná vajíčka s mlékem a solí. Chleba obalte ve vajíčku a nechte ho trochu nasáknout. Na pánvi rozehřejte polovinu másla a postupně chleba ze všech stran dozlatova osmahněte. Ještě teplé hranolky obalte ve skořicovém cukru (cukr krupice smíchaný se skořicí) a naservírujte na talířku nebo v hezkém hrnečku. Skořicové hranolky můžete také ve zjednodušené podobě upéct v troubě. V tom případě přelijte rozpuštěné máslo přes pokrájené hranolky ze staršího chleba a důkladně rukama promíchejte. Zasypte je cukrem se skořicí a opět promíchejte tak, aby se cukr rovnoměrně distribuoval po celém povrchu chleba. Pečte na 180 °C dozlatova, přibližně 5 až 10 minut. Po vytažení z trouby je můžete ještě extra zasypat trochou skořice.",
+      "imgUri": "https://zachranjidlo.cz/wp-content/uploads/sh7a0274-1-1024x527-1200x500-c-default.jpg",
+      "ingredients": [
+        {
+          "id": "1eadc60f4d5bf8bf",
+          "amount": 4,
+          "unit": "plátky"
+        },
+        {
+          "id": "7e85150c34fd62eb",
+          "amount": 2,
+          "unit": "ks"
+        },
+        {
+          "id": "2ffb380763c16c97",
+          "amount": 60,
+          "unit": "ml"
+        },
+        {
+          "id": "34109b1b210e32ed",
+          "amount": 30,
+          "unit": "g"
+        },
+        {
+          "id": "3f702872fb8e99f8",
+          "amount": 1,
+          "unit": "špetka"
+        },
+        {
+          "id": "ea32fb839257568d",
+          "amount": 1,
+          "unit": "lžička"
+        },
+        {
+          "id": "6740ae2c9acfa794",
+          "amount": 2,
+          "unit": "lžíce"
+        }
+      ],
+      "id": "e6a2450d6d6cd747"
     }
   ]
 };
@@ -268,22 +542,7 @@ function App() {
     <div className="App">
       <h1>{recipes.name}</h1>
       <h2>Vyběr si něco dobrého</h2>
-      <div className="recipe-list">
-        {recipes.recipes.map((recipe) => (
-          <><div key={recipe.id} className="recipe">
-            <h3>{recipe.name}</h3>
-            <img src={recipe.imgUri} alt={recipe.name} />
-            <p>{recipe.description}</p>
-            <ul className="ingredients">
-              {recipe.ingredients.map((ingredient) => (
-                <li key={ingredient.id}>{ingredient.amount} {ingredient.unit}</li>
-              ))}
-            </ul>
-          </div>
-            <span className="separator"># # # # # # # # # # # # # # #</span>
-          </>
-        ))}
-      </div>
+      <RecipeList recipes={recipes.recipes} />
     </div>
   );
 }

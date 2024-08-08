@@ -32,33 +32,52 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-/* .recipe-list {
+.carousel {
+  /* center */
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
 
-  .recipe {
-    border: 2px solid #3c1a04;
-    border-radius: 5%;
-    padding: 10px;
-    width: 250px;
-    text-align: center;
+  .carousel-item-next,
+  .carousel-item-prev,
+  .carousel-item.active {
+    /* hide backface */
+    backface-visibility: hidden;
+    /* always show next pair */
+    z-index: 1;
+  }
 
-    &:hover {
-      background-color: #f9f9f9;
-      cursor: pointer;
-      width: 400px
-    }
+  .carousel-item-next,
+  .carousel-item-prev {
+    transform: rotateY(180deg);
+  }
 
-    .ingredients {
-      font-size: 0.8em;
-      margin-top: 10px;
+  .row {
+    display: flex;
+  }
+
+  .carousel-pair {
+    position: absolute;
+    /*  */
+    transition: transform 0.5s ease;
+
+    .card {
+      background-color: rgb(255, 255, 255);
+      border-color: #142a58;
+      border-width: 5px;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
+
+      width: 400px;
+      height: 450px;
+
+      flex-direction: column;
+      justify-content: center;
     }
   }
-} */
+}
