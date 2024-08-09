@@ -78,6 +78,16 @@
 
       flex-direction: column;
       justify-content: center;
+      .card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .card-img-top {
+        width: 25px;
+        height: 25px;
+        object-fit: cover;
+      }
     }
   }
 }
