@@ -1,5 +1,6 @@
 import './App.css';
 import RecipeList from './components/RecipeList';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const recipes = {
   name: "Babiččiny recepty",

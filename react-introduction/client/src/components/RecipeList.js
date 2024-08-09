@@ -30,6 +30,7 @@ function RecipeList({ recipes }) {
                 className="carousel"
                 activeIndex={activeIndex}
                 onSelect={handleSelect}
+                interval={null}
             >
                 {recipePairs.map((pair, index) => (
                     <Carousel.Item className="carousel-pair" key={index}>
