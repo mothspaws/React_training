@@ -19,11 +19,6 @@ function RecipeList({ recipes }) {
         setActiveIndex(selectedIndex);
     };
 
-    const handleNextClick = () => {
-        const nextIndex = (activeIndex + 1) % recipePairs.length;
-        setActiveIndex(nextIndex);
-    };
-
     return (
         <div>
             <Carousel
@@ -35,10 +30,9 @@ function RecipeList({ recipes }) {
                 {recipePairs.map((pair, index) => (
                     <Carousel.Item className="carousel-pair" key={index}>
                         <Row>
-                            {pair.map((recipe) => (
+                            {pair.map((recipe, index) => (
                                 <Col
                                     key={recipe.id}
-                                    onClick={handleNextClick}
                                 >
                                     <Recipe recipe={recipe} />
                                 </Col>
