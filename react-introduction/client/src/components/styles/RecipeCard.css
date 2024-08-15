@@ -10,6 +10,10 @@
   position: relative;
   overflow: hidden;
 
+  &:hover {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  }
+
   .card-title {
     font-size: 1.5rem;
     font-weight: bold;
@@ -40,7 +44,7 @@
 
 .card.small {
   width: 400px;
-  height: 250px;
+  height: 200px;
 
   .card-text {
     -webkit-line-clamp: 3;

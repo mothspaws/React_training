@@ -1,5 +1,7 @@
 import './App.css';
-import RecipeList from './components/RecipeBook';
+import RecipeBook from './components/RecipeBook';
+import RecipeTable from './components/RecipeTable';
+import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const recipes = {
@@ -539,13 +541,30 @@ const recipes = {
 };
 
 function App() {
-  return (
-    <div className="App">
-      <h1>{recipes.name}</h1>
-      <h2>Vyběr si něco dobrého</h2>
-      <RecipeList recipes={recipes.recipes} />
+  const [viewMode, setViewMode] = useState('table');
+
+  const handleViewChange = (mode) => {
+    setViewMode(mode);
+  };
+
+return (
+  <div className="App">
+    <div className="view-toggle">
+      <button onClick={() => handleViewChange('table')} disabled={viewMode === 'table'}>
+        Administrace
+      </button>
+      <button onClick={() => handleViewChange('book')} disabled={viewMode === 'book'}>
+        Kniha receptů
+      </button>
     </div>
-  );
+
+    {viewMode === 'table' ? (
+      <RecipeTable recipes={recipes.recipes} />
+    ) : (
+      <RecipeBook recipes={recipes.recipes} />
+    )}
+  </div>
+);
 }
 
 export default App;
