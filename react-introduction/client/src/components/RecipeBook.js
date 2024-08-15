@@ -10,9 +10,11 @@ function chunkArray(array, chunkSize) {
     return results;
 }
 
-function RecipeBook({ recipes, onZoomClick }) {
+function RecipeBook({ recipes }) {
+    // pairs
     const recipePairs = chunkArray(recipes, 2);
 
+    // listing recipes
     const [currentPage, setCurrentPage] = useState(0);
 
     const handleNextPage = () => {
@@ -40,7 +42,6 @@ function RecipeBook({ recipes, onZoomClick }) {
                             <RecipeCard 
                                 recipe={recipe} 
                                 size="medium" 
-                                onZoomClick={() => onZoomClick(recipe)} 
                             />
                         </div>
                     ))}
