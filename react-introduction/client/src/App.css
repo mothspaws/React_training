@@ -1,90 +1,41 @@
 .App {
   text-align: center;
-
-  .carousel {
-    width: 900px;
-    height: 450px;
-    margin: 0 auto;
-
-    .carousel-indicators {
-      visibility: hidden;
-    }
-
-    .carousel-control-next-icon{
-      background-image: url('./components/storage/right-arrow-svgrepo-com.svg');
-    }
-
-    .carousel-pair {
-
-      .card {
-        background-color: rgb(255, 255, 255);
-        border-color: #142a58;
-        border-width: 1px;
-        padding: 30px;
-        border-radius: 5px;
-        box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
-
-        width: 400px;
-        height: 450px;
-
-        flex-direction: column;
-
-        .card-title {
-          font-size: 1.5rem;
-          font-weight: bold;
-        }
-
-        .card-img-top {
-          width: 25px;
-          height: 25px;
-          margin: 0 auto;
-        }
-
-        .card-text {
-          font-size: 1rem;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          -webkit-line-clamp: 10;
-        }
-      }
-    }
-  }
+  margin: 20px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.search-bar {
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.search-bar input {
+  padding: 10px;
+  width: 300px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.view-toggle {
+  margin-bottom: 20px;
+}
+
+.view-toggle button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  border: none;
+  background-color: #142a58;
   color: white;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
-.App-link {
-  color: #61dafb;
+.view-toggle button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+.view-toggle button:not(:disabled):hover {
+  background-color: #1d3a87;
 }

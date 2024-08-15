@@ -1,0 +1,8 @@
+.recipe-modal .modal-header {
+    background-color: #142a58;
+    color: white;
+}
+
+.recipe-modal .modal-footer {
+    justify-content: center;
+}
