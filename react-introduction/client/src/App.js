@@ -1,7 +1,7 @@
 import './App.css';
 import RecipeBook from './components/RecipeBook';
 import RecipeTable from './components/RecipeTable';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const recipes = {
@@ -541,30 +541,58 @@ const recipes = {
 };
 
 function App() {
+  // view mode
   const [viewMode, setViewMode] = useState('table');
 
   const handleViewChange = (mode) => {
     setViewMode(mode);
   };
 
-return (
-  <div className="App">
-    <div className="view-toggle">
-      <button onClick={() => handleViewChange('table')} disabled={viewMode === 'table'}>
-        Administrace
-      </button>
-      <button onClick={() => handleViewChange('book')} disabled={viewMode === 'book'}>
-        Kniha receptů
-      </button>
-    </div>
+  // search
+  const [searchQuery, setSearchQuery] = useState('');
 
-    {viewMode === 'table' ? (
-      <RecipeTable recipes={recipes.recipes} />
-    ) : (
-      <RecipeBook recipes={recipes.recipes} />
-    )}
-  </div>
-);
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredRecipes = useMemo(() => {
+    return recipes.recipes.filter((recipe) => {
+      return (
+        recipe.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        recipe.description.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    });
+  }, [searchQuery]);
+
+  return (
+    <div className="App">
+      <div className="view-toggle">
+        <button onClick={() => handleViewChange('table')} disabled={viewMode === 'table'}>
+          Administrace
+        </button>
+        <button onClick={() => handleViewChange('book')} disabled={viewMode === 'book'}>
+          Kniha receptů
+        </button>
+      </div>
+
+      {viewMode === 'table' ? (
+        <>
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Hledat recepty..."
+              value={searchQuery}
+              onChange={handleSearchChange}
+            />
+          </div>
+          <RecipeTable recipes={filteredRecipes} />
+        </>
+
+      ) : (
+        <RecipeBook recipes={recipes.recipes} />
+      )}
+    </div>
+  );
 }
 
 export default App;
