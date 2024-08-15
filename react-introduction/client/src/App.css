@@ -1,56 +1,5 @@
 .App {
   text-align: center;
-
-  .carousel {
-    width: 900px;
-    height: 450px;
-    margin: 0 auto;
-
-    .carousel-indicators {
-      visibility: hidden;
-    }
-
-    .carousel-control-next-icon{
-      background-image: url('./components/storage/right-arrow-svgrepo-com.svg');
-    }
-
-    .carousel-pair {
-
-      .card {
-        background-color: rgb(255, 255, 255);
-        border-color: #142a58;
-        border-width: 1px;
-        padding: 30px;
-        border-radius: 5px;
-        box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
-
-        width: 400px;
-        height: 450px;
-
-        flex-direction: column;
-
-        .card-title {
-          font-size: 1.5rem;
-          font-weight: bold;
-        }
-
-        .card-img-top {
-          width: 25px;
-          height: 25px;
-          margin: 0 auto;
-        }
-
-        .card-text {
-          font-size: 1rem;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          -webkit-line-clamp: 10;
-        }
-      }
-    }
-  }
 }
 
 .App-logo {

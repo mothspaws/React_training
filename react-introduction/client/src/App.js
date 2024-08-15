@@ -1,5 +1,5 @@
 import './App.css';
-import RecipeList from './components/RecipeList';
+import RecipeList from './components/RecipeBook';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const recipes = {

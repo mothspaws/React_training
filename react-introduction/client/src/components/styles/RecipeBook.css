@@ -1,0 +1,55 @@
+.recipe-book {
+    position: relative;
+    width: 900px;
+    height: 500px;
+    margin: 0 auto;
+
+    .recipe-pair {
+        position: absolute;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        backface-visibility: hidden;
+        transition-duration: 2s; 
+    }
+
+    .recipe-pair.flipped {
+        transform: rotateY(-180deg);
+    }
+    
+    .recipe-column {
+        margin: 5px;
+    }
+
+    .controls {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+    }
+
+    .previous, .next {
+        width: 25px;
+        height: 25px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        background-size: contain;
+    }
+
+    .previous {
+        background-image: url('./storage/left-arrow-svgrepo-com.svg');
+    }
+
+    .next {
+        background-image: url('./storage/right-arrow-svgrepo-com.svg');
+    }
+
+    .previous:disabled, .next:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
