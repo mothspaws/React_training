@@ -1,7 +1,8 @@
 import './styles/RecipeCard.css';
 import { Card } from "react-bootstrap";
 import RecipeModal from './RecipeModal';
-import { useState } from 'react';
+import { getIngredientById } from './/api/IngredientsApi';
+import { useState, useEffect } from 'react';
 import restaurantImage from './storage/restaurant.png';
 
 function RecipeCard({ recipe, size }) {
@@ -13,6 +14,35 @@ function RecipeCard({ recipe, size }) {
     const handleZoomClick = () => {
         setModalShow(true);
     };
+
+    // ingredients
+    const [ingredients, setIngredients] = useState([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const fetchedIngredients = await Promise.all(
+                    recipe.ingredients.map(ingredient => 
+                        getIngredientById(ingredient.id)
+                    )
+                );
+
+                const combinedIngredients = recipe.ingredients.map((ingredient) => {
+                    const fetchedIngredient = fetchedIngredients.find(item => item.id === ingredient.id);
+                    return {
+                        name: fetchedIngredient ? fetchedIngredient.name : 'Unknown ingredient',
+                        amount: ingredient.amount,
+                        unit: ingredient.unit
+                    };
+                });
+
+                setIngredients(combinedIngredients);
+            } catch (error) {
+                console.error("Failed to load ingredients", error);
+            }
+        }
+        fetchData();
+    }, [recipe.ingredients]);
     
     return (
         <>
@@ -26,6 +56,13 @@ function RecipeCard({ recipe, size }) {
                     <Card.Text className="card-text">
                         {recipe.description}
                     </Card.Text>
+                    {size === 'small' && (
+                            <ul className="card-ingredients">
+                                {ingredients.map((ingredient, index) => (
+                                    <li className="card-ingredient" key={index}>{ingredient.name} {ingredient.amount} {ingredient.unit}</li>
+                                ))}
+                            </ul>
+                        )}
                     {size !== 'large' && (
                         <div className="card-zoom" onClick={handleZoomClick}>
                             🔍
@@ -37,6 +74,7 @@ function RecipeCard({ recipe, size }) {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 recipe={recipe}
+                ingredients={ingredients}
             />
         </>
     );

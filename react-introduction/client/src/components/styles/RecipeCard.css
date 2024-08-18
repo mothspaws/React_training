@@ -44,10 +44,26 @@
 
 .card.small {
   width: 400px;
-  height: 200px;
+  height: 250px;
 
   .card-text {
     -webkit-line-clamp: 3;
+  }
+
+  .card-ingredients {
+    display: flex;
+    flex-direction: column;
+
+    .card-ingredient {
+      display: flex;
+      overflow: hidden;
+      margin-bottom: 10px;
+      &:before {
+        content: "•";
+        margin-right: 5px;
+        color: #142a58;
+      }
+    }
   }
 }
 

@@ -16,18 +16,18 @@ async function getIngredients() {
 }
 
 async function getIngredientById(id) {
-    try {
-      const response = await fetch(`${API_BASE_URL}/get?id=${id}`, {
-        method: "GET",
-      });
-      if (!response.ok) {
-        throw new Error("Failed to fetch the ingredient");
-      }
-      return await response.json();
-    } catch (error) {
-      console.error("Error fetching the ingredient:", error);
-      throw error;
+  try {
+    const response = await fetch(`${API_BASE_URL}/get?id=${id}`, {
+      method: "GET",
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch the ingredient");
     }
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching the ingredient:", error);
+    throw error;
   }
+}
 
 export { getIngredients, getIngredientById };

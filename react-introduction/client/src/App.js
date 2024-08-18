@@ -2,7 +2,6 @@ import './App.css';
 import RecipeBook from './components/RecipeBook';
 import RecipeTable from './components/RecipeTable';
 import { getRecipes } from './components/api/RecipeApi';
-import { getIngredients } from './components/api/IngredientsApi';
 import { useState, useMemo, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -22,24 +21,6 @@ function App() {
         setLoading(false);
       }
     }
-    fetchData();
-  }, []);
-
-  // ingredients
-  const [ingredients, setIngredients] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const fetchedIngredients = await getIngredients();
-        setIngredients(fetchedIngredients);
-        setLoading(false);
-      } catch (error) {
-        console.error("Failed to load ingredients", error);
-        setLoading(false);
-      }
-    }
-
     fetchData();
   }, []);
 
