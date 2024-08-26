@@ -6,3 +6,10 @@
 .recipe-modal .modal-footer {
     justify-content: center;
 }
+
+@media (max-width: 768px) {
+    .recipe-modal .modal-dialog {
+        width: 96%;
+        max-width: 100%;
+    }
+}

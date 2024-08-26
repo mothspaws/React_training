@@ -1,7 +1,7 @@
 import './styles/RecipeCard.css';
 import { Card } from "react-bootstrap";
 import RecipeModal from './RecipeModal';
-import { getIngredientById } from './/api/IngredientsApi';
+import { getIngredientById } from './api/IngredientsApi';
 import { useState, useEffect } from 'react';
 import restaurantImage from './storage/restaurant.png';
 
