@@ -34,6 +34,9 @@ function App() {
                 <Offcanvas.Body>
                   <Nav className="justify-content-end flex-grow-1 pe-3">
                 // Zde bude rozbalovací menu se seznamem tříd
+                    <Nav.Link onClick={() => navigate("/home")}>
+                      Domů
+                    </Nav.Link>
                     <Nav.Link onClick={() => navigate("/recipeList")}>
                       Recepty
                     </Nav.Link>

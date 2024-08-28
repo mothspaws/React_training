@@ -35,11 +35,11 @@
     }
 
     .previous {
-        background-image: url('./storage/left-arrow-svgrepo-com.svg');
+        background-image: url('../storage/left-arrow-svgrepo-com.svg');
     }
 
     .next {
-        background-image: url('./storage/right-arrow-svgrepo-com.svg');
+        background-image: url('../storage/right-arrow-svgrepo-com.svg');
     }
 
     .previous:disabled, .next:disabled {

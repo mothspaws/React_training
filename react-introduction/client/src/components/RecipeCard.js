@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 import RecipeModal from './RecipeModal';
 import { getIngredientById } from './api/IngredientsApi';
 import { useState, useEffect } from 'react';
-import restaurantImage from './storage/restaurant.png';
+import restaurantImage from '../components/storage/restaurant.png';
 
 function RecipeCard({ recipe, size }) {
     const cardClass = `card ${size}`;
