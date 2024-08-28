@@ -1,8 +1,10 @@
 import './styles/RecipeList.css';
 import RecipeBook from '../components/RecipeBook';
 import RecipeTable from '../components/RecipeTable';
-import { getRecipes } from '../components/api/RecipeApi';
+import { getRecipes } from '../components/api/RecipeApi.js';
+import { getIngredients } from '../components/api/IngredientsApi.js';
 import { useState, useMemo, useEffect } from 'react';
+import AddRecipeModal from '../components/AddRecipeModal.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function RecipeList() {
@@ -22,6 +24,23 @@ function RecipeList() {
       }
     }
     fetchData();
+  }, []);
+
+  // ingredients
+  const [ingredients, setIngredients] = useState([]);
+
+  useEffect(() => {
+      async function fetchData() {
+          try {
+              const fetchedIngredients = await getIngredients();
+              setIngredients(fetchedIngredients);
+              setLoading(false);
+          } catch (error) {
+              console.error("Failed to load ingredients", error);
+              setLoading(false);
+          }
+      }
+      fetchData();
   }, []);
 
   // view mode
@@ -47,6 +66,11 @@ function RecipeList() {
     });
   }, [searchQuery]);
 
+  // modal
+  const [showAddRecipeModal, setShowAddRecipeModal] = useState(false);
+  const handleShowAddRecipeModal = () => setShowAddRecipeModal(true);
+  const handleCloseAddRecipeModal = () => setShowAddRecipeModal(false);
+
   return (
     <div className="App">
       {loading ? (
@@ -60,6 +84,10 @@ function RecipeList() {
             <button onClick={() => handleViewChange('book')} disabled={viewMode === 'book'}>
               Kniha receptů
             </button>
+            <button onClick={handleShowAddRecipeModal}>
+              Přidat recept
+            </button>
+            <AddRecipeModal show={showAddRecipeModal} handleClose={handleCloseAddRecipeModal} ingredientsAll={ingredients}/>
           </div>
 
           {viewMode === 'table' ? (
