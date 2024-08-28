@@ -54,7 +54,7 @@ function RecipeCard({ recipe, size }) {
                 <Card.Body className="card-body">
                     <Card.Title className="card-title">{recipe.name}</Card.Title>
                     <Card.Text className="card-text">
-                        {recipe.description}
+                        <div dangerouslySetInnerHTML={{ __html: recipe.description }} />
                     </Card.Text>
                     {size === 'small' && (
                             <ul className="card-ingredients">
