@@ -3,83 +3,55 @@ import RecipeBook from './components/RecipeBook';
 import RecipeTable from './components/RecipeTable';
 import { getRecipes } from './components/api/RecipeApi';
 import { useState, useMemo, useEffect } from 'react';
+import { Outlet, useNavigate } from "react-router-dom";
+import { Navbar, Container, Nav, Offcanvas } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  // recipes
-  const [recipes, setRecipes] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const fetchedRecipes = await getRecipes();
-        setRecipes(fetchedRecipes);
-        setLoading(false);
-      } catch (error) {
-        console.error("Failed to load recipes", error);
-        setLoading(false);
-      }
-    }
-    fetchData();
-  }, []);
-
-  // view mode
-  const [viewMode, setViewMode] = useState('table');
-
-  const handleViewChange = (mode) => {
-    setViewMode(mode);
-  };
-
-  // search
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
-  };
-
-  const filteredRecipes = useMemo(() => {
-    return recipes.filter((recipe) => {
-      return (
-        recipe.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        recipe.description.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    });
-  }, [searchQuery]);
+  // navigation
+  let navigate = useNavigate();
 
   return (
     <div className="App">
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <>
-          <div className="view-toggle">
-            <button onClick={() => handleViewChange('table')} disabled={viewMode === 'table'}>
-              Administrace
-            </button>
-            <button onClick={() => handleViewChange('book')} disabled={viewMode === 'book'}>
-              Kniha receptů
-            </button>
-          </div>
-
-          {viewMode === 'table' ? (
-            <>
-              <div className="search-bar">
-                <input
-                  type="text"
-                  placeholder="Hledat recepty..."
-                  value={searchQuery}
-                  onChange={handleSearchChange}
-                />
-              </div>
-              <RecipeTable recipes={filteredRecipes} />
-            </>
-
-          ) : (
-            <RecipeBook recipes={recipes} />
-          )}
-        </>
-      )}
+      <Navbar
+            fixed="top"
+            expand={"sm"}
+            className="mb-3"
+            bg="dark"
+            variant="dark"
+          >
+            <Container fluid>
+              <Navbar.Brand onClick={() => navigate("/")}>
+                Kuchařka
+              </Navbar.Brand>
+              <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-sm`} />
+              <Navbar.Offcanvas id={`offcanvasNavbar-expand-sm`}>
+                <Offcanvas.Header closeButton>
+                  <Offcanvas.Title id={`offcanvasNavbarLabel-expand-sm`}>
+                  Kuchařka
+                  </Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                  <Nav className="justify-content-end flex-grow-1 pe-3">
+                // Zde bude rozbalovací menu se seznamem tříd
+                    <Nav.Link onClick={() => navigate("/home")}>
+                      Domů
+                    </Nav.Link>
+                    <Nav.Link onClick={() => navigate("/recipeList")}>
+                      Recepty
+                    </Nav.Link>
+                    <Nav.Link onClick={() => navigate("/recipeDetail")}>
+                      Detail receptu
+                    </Nav.Link>
+                    <Nav.Link onClick={() => navigate("/ingredientList")}>
+                      Ingredience
+                    </Nav.Link>
+                  </Nav>
+                </Offcanvas.Body>
+              </Navbar.Offcanvas>
+            </Container>
+          </Navbar>
+          <Outlet />
     </div>
   );
 }

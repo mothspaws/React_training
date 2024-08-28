@@ -10,12 +10,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        backface-visibility: hidden;
-        transition-duration: 2s; 
-    }
-
-    .recipe-pair.flipped {
-        transform: rotateY(-180deg);
     }
     
     .recipe-column {
@@ -41,11 +35,11 @@
     }
 
     .previous {
-        background-image: url('./storage/left-arrow-svgrepo-com.svg');
+        background-image: url('../storage/left-arrow-svgrepo-com.svg');
     }
 
     .next {
-        background-image: url('./storage/right-arrow-svgrepo-com.svg');
+        background-image: url('../storage/right-arrow-svgrepo-com.svg');
     }
 
     .previous:disabled, .next:disabled {

@@ -2,23 +2,12 @@ import './styles/RecipeBook.css';
 import { useState } from 'react';
 import RecipeCard from "./RecipeCard";
 
-function chunkArray(array, chunkSize) {
-    const results = [];
-    for (let i = 0; i < array.length; i += chunkSize) {
-        results.push(array.slice(i, i + chunkSize));
-    }
-    return results;
-}
-
 function RecipeBook({ recipes }) {
-    // pairs
-    const recipePairs = chunkArray(recipes, 2);
-
     // listing recipes
     const [currentPage, setCurrentPage] = useState(0);
 
     const handleNextPage = () => {
-        if (currentPage < recipePairs.length - 1) {
+        if (currentPage < Math.ceil(recipes.length / 2) - 1) {
             setCurrentPage(currentPage + 1);
         }
     };
@@ -29,24 +18,28 @@ function RecipeBook({ recipes }) {
         }
     };
 
+    // Calculate start and end indices for the current page
+    const startIndex = currentPage * 2;
+    const endIndex = startIndex + 2;
+
+    // Extract the recipes to be shown on the current page
+    const currentRecipes = recipes.slice(startIndex, endIndex);
+
     return (
         <div className="recipe-book">
-            {recipePairs.map((pair, index) => (
-                <div 
-                    className={`recipe-pair ${index === currentPage ? 'active' : ''} ${index < currentPage ? 'flipped' : ''}`}
-                    key={index}
-                    style={{ zIndex: recipePairs.length - index }}
-                >
-                    {pair.map((recipe) => (
-                        <div className="recipe-column" key={recipe.id}>
-                            <RecipeCard 
-                                recipe={recipe} 
-                                size="medium" 
-                            />
-                        </div>
-                    ))}
-                </div>
-            ))}
+            <div 
+                className={`recipe-pair active`} 
+                style={{ zIndex: recipes.length - currentPage }}
+            >
+                {currentRecipes.map((recipe) => (
+                    <div className="recipe-column flipped" key={recipe.id}>
+                        <RecipeCard 
+                            recipe={recipe} 
+                            size="medium" 
+                        />
+                    </div>
+                ))}
+            </div>
             <div className="controls">
                 <button 
                     className="previous" 
@@ -56,7 +49,7 @@ function RecipeBook({ recipes }) {
                 <button 
                     className="next"
                     onClick={handleNextPage} 
-                    disabled={currentPage === recipePairs.length - 1}>
+                    disabled={currentPage === Math.ceil(recipes.length / 2) - 1}>
                     </button>
             </div>
         </div>
