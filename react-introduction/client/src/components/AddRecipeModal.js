@@ -7,7 +7,10 @@ import 'react-quill/dist/quill.snow.css';
 function AddRecipeModal({ show, handleClose, ingredientsAll }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+    const [descriptionError, setDescriptionError] = useState(''); // pro validaci delky popisu
+    const [titleError, setTitleError] = useState(''); // pro validaci delky nazvu
     const [ingredients, setIngredients] = useState([{ name: '', amount: '', unit: '' }]);
+    const [ingredientErrors, setIngredientErrors] = useState({});
 
     const handleAddIngredient = () => {
         setIngredients([...ingredients, { name: '', amount: '', unit: '' }]);
@@ -26,7 +29,11 @@ function AddRecipeModal({ show, handleClose, ingredientsAll }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-    
+
+        if (!validateForm()) {
+            return;
+        }
+
         const recipeData = {
             name: title,
             description: description,
@@ -36,13 +43,65 @@ function AddRecipeModal({ show, handleClose, ingredientsAll }) {
                 unit: ingredient.unit
             }))
         };
-    
+
         try {
             await createRecipe(recipeData);
+            setDescription('');
+            setTitle('');
+            setIngredients([{ name: '', amount: '', unit: '' }]);
             handleClose();
         } catch (error) {
             console.error("Error creating recipe:", error);
-            alert("Nastala neočekávaná chyba při vytváření receptu");
+            alert("Nastaлa neočekávaná chyba při vytváření receptu");
+        }
+    };
+
+    const validateForm = () => {
+        let valid = true;
+        const errors = {};
+
+        if (!title.trim()) {
+            setTitleError('Pole "Název" musí být vyplněno.');
+            valid = false;
+        } else {
+            setTitleError('');
+        }
+
+        if (description.trim().length === 0) {
+            setDescriptionError('Pole "Postup" musí být vyplněno.');
+            valid = false;
+        } else if (description.length > 500) {
+            setDescriptionError('Popis nesmí být delší než 500 znaků.');
+            valid = false;
+        } else {
+            setDescriptionError('');
+        }
+
+        ingredients.forEach((ingredient, index) => {
+            if (!ingredient.name) {
+                errors[index] = { ...errors[index], name: 'Vyběrte si ingredience' };
+                valid = false;
+            }
+            if (!ingredient.amount) {
+                errors[index] = { ...errors[index], amount: 'Zadejte počet ingrediencí' };
+                valid = false;
+            }
+            if (!ingredient.unit) {
+                errors[index] = { ...errors[index], unit: 'Vyběrte si jednotky' };
+                valid = false;
+            }
+        });
+
+        setIngredientErrors(errors);
+        return valid;
+    };
+
+    const handleDescriptionChange = (value) => {
+        if (value.length <= 500) {
+            setDescription(value);
+            setDescriptionError('');
+        } else {
+            setDescriptionError('Popis nesmí být delší než 500 znaků.');
         }
     };
 
@@ -59,12 +118,20 @@ function AddRecipeModal({ show, handleClose, ingredientsAll }) {
                             type="text"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                            required
+                            isInvalid={!!titleError}
                         />
+                        {titleError && (
+                            <Form.Control.Feedback type="invalid">
+                                {titleError}
+                            </Form.Control.Feedback>
+                        )}
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Postup</Form.Label>
-                        <ReactQuill value={description} onChange={setDescription} />
+                        <ReactQuill value={description} onChange={handleDescriptionChange} />
+                        {descriptionError && (
+                            <small className="text-danger">{descriptionError}</small>
+                        )}
                     </Form.Group>
                     <Row className="mb-2">
                         <Col md={5}><strong>Ingredience</strong></Col>
@@ -79,7 +146,7 @@ function AddRecipeModal({ show, handleClose, ingredientsAll }) {
                                     as="select"
                                     value={ingredient.name}
                                     onChange={(e) => handleIngredientChange(index, 'name', e.target.value)}
-                                    required
+                                    isInvalid={!!ingredientErrors[index]?.name}
                                 >
                                     <option value="">Vyberte ingredienci</option>
                                     {ingredientsAll.map((ingredient) => (
@@ -88,23 +155,41 @@ function AddRecipeModal({ show, handleClose, ingredientsAll }) {
                                         </option>
                                     ))}
                                 </Form.Control>
+                                {ingredientErrors[index]?.name && (
+                                    <Form.Control.Feedback type="invalid">
+                                        {ingredientErrors[index].name}
+                                    </Form.Control.Feedback>
+                                )}
                             </Col>
                             <Col md={3}>
                                 <Form.Control
                                     type="number"
                                     value={ingredient.amount}
                                     min={0}
+                                    step={0.1}
+                                    max={1000}
                                     onChange={(e) => handleIngredientChange(index, 'amount', e.target.value)}
-                                    required
+                                    isInvalid={!!ingredientErrors[index]?.amount}
                                 />
+                                {ingredientErrors[index]?.amount && (
+                                    <Form.Control.Feedback type="invalid">
+                                        {ingredientErrors[index].amount}
+                                    </Form.Control.Feedback>
+                                )}
                             </Col>
                             <Col md={2}>
                                 <Form.Control
                                     type="text"
                                     value={ingredient.unit}
+                                    maxLength={5}
                                     onChange={(e) => handleIngredientChange(index, 'unit', e.target.value)}
-                                    required
+                                    isInvalid={!!ingredientErrors[index]?.unit}
                                 />
+                                {ingredientErrors[index]?.unit && (
+                                    <Form.Control.Feedback type="invalid">
+                                        {ingredientErrors[index].unit}
+                                    </Form.Control.Feedback>
+                                )}
                             </Col>
                             <Col>
                                 <Button variant="danger" onClick={() => handleRemoveIngredient(index)}>
