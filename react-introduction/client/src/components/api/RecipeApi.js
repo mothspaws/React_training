@@ -36,4 +36,25 @@ async function createRecipe(recipeData) {
     }
 }
 
-export { getRecipes, createRecipe };
+// Update recipe
+async function updateRecipe(recipeId, recipeData) {
+    console.log(recipeId, recipeData);
+    try {
+        const response = await fetch(`${API_BASE_URL}/update`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id: recipeId, ...recipeData }),
+        });
+        if (!response.ok) {
+            throw new Error("Failed to update recipe");
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error updating recipe:", error);
+        throw error;
+    }
+}
+
+export { getRecipes, createRecipe, updateRecipe };

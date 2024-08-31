@@ -1,16 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
 import ReactQuill from 'react-quill';
-import { createRecipe } from './api/RecipeApi.js';
+import { createRecipe, updateRecipe } from './api/RecipeApi.js';
 import 'react-quill/dist/quill.snow.css';
 
-function AddRecipeModal({ show, handleClose, ingredientsAll }) {
+function AddRecipeModal({ show, handleClose, ingredientsAll, recipe, recipeIngredients }) {
+    const isEditMode = !!recipe; // zda je modal v editacnim modu
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [descriptionError, setDescriptionError] = useState(''); // pro validaci delky popisu
     const [titleError, setTitleError] = useState(''); // pro validaci delky nazvu
+    const [descriptionError, setDescriptionError] = useState(''); // pro validaci delky popisu
     const [ingredients, setIngredients] = useState([{ name: '', amount: '', unit: '' }]);
     const [ingredientErrors, setIngredientErrors] = useState({});
+
+    useEffect(() => {
+        if (!!recipe) {
+            setTitle(recipe.name || '');
+            setDescription(recipe.description || '');
+            setIngredients(recipeIngredients || [{ name: '', amount: '', unit: '' }]);
+        }
+    }, [recipe, recipeIngredients]);
 
     const handleAddIngredient = () => {
         setIngredients([...ingredients, { name: '', amount: '', unit: '' }]);
@@ -45,14 +54,16 @@ function AddRecipeModal({ show, handleClose, ingredientsAll }) {
         };
 
         try {
-            await createRecipe(recipeData);
-            setDescription('');
-            setTitle('');
-            setIngredients([{ name: '', amount: '', unit: '' }]);
+            if (isEditMode) {
+                await updateRecipe(recipe.id, recipeData);
+            } else {
+                await createRecipe(recipeData);
+            }
+            resetForm();
             handleClose();
         } catch (error) {
-            console.error("Error creating recipe:", error);
-            alert("Nastaлa neočekávaná chyba při vytváření receptu");
+            console.error(`Error ${isEditMode ? "updating" : "creating"} recipe:`, error);
+            alert("Nastala neočekávaná chyba při zpracování receptu.");
         }
     };
 
@@ -105,11 +116,20 @@ function AddRecipeModal({ show, handleClose, ingredientsAll }) {
         }
     };
 
+    const resetForm = () => {
+        setTitle('');
+        setDescription('');
+        setIngredients([{ name: '', amount: '', unit: '' }]);
+        setDescriptionError('');
+        setTitleError('');
+        setIngredientErrors({});
+    };
+
     return (
         <Modal show={show} onHide={handleClose}>
             <Form onSubmit={handleSubmit}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Vytvoření receptu</Modal.Title>
+                    <Modal.Title>{isEditMode ? 'Upravit recept' : 'Vytvoření receptu'}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form.Group className="mb-3">
@@ -166,7 +186,7 @@ function AddRecipeModal({ show, handleClose, ingredientsAll }) {
                                     type="number"
                                     value={ingredient.amount}
                                     min={0}
-                                    step={0.1}
+                                    step={0.01}
                                     max={1000}
                                     onChange={(e) => handleIngredientChange(index, 'amount', e.target.value)}
                                     isInvalid={!!ingredientErrors[index]?.amount}
@@ -207,7 +227,7 @@ function AddRecipeModal({ show, handleClose, ingredientsAll }) {
                         Zavřít
                     </Button>
                     <Button variant="primary" type="submit">
-                        Vytvořit
+                        {isEditMode ? 'Uložit změny' : 'Vytvořit'}
                     </Button>
                 </Modal.Footer>
             </Form>

@@ -7,6 +7,10 @@
     justify-content: center;
 }
 
+.card-description {
+    word-break: break-word;
+}
+
 @media (max-width: 768px) {
     .recipe-modal .modal-dialog {
         width: 96%;
