@@ -2,6 +2,7 @@ import './styles/RecipeCard.css';
 import { Card } from "react-bootstrap";
 import RecipeModal from './RecipeModal';
 import { getIngredientById } from './api/IngredientsApi';
+import { deleteRecipe } from './api/RecipeApi.js';
 import { useState, useEffect } from 'react';
 import restaurantImage from '../components/storage/restaurant.png';
 import AddRecipeModal from './AddRecipeModal.js';
@@ -22,6 +23,17 @@ function RecipeCard({ recipe, size }) {
     const handleEditRecipeModal = () => setEditMode(true);
     const handleCloseEditRecipeModal = () => setEditMode(false);
 
+    // delete
+    const handleDeleteRecipe = async () => {
+        try {
+            await deleteRecipe(recipe.id);
+            window.location.reload();
+        } catch (error) {
+            console.error("Failed to delete recipe", error);
+        }
+    }
+
+
     // ingredients
     const [ingredientsAll, setIngredientsAll] = useState([]);
     const [ingredients, setIngredients] = useState([]);
@@ -35,7 +47,7 @@ function RecipeCard({ recipe, size }) {
                     )
                 );
 
-                setIngredientsAll(ingredientsAll);
+                setIngredientsAll(fetchedIngredients);
 
                 const combinedIngredients = recipe.ingredients.map((ingredient) => {
                     const fetchedIngredient = fetchedIngredients.find(item => item.id === ingredient.id);
@@ -89,6 +101,8 @@ function RecipeCard({ recipe, size }) {
                                 recipe={recipe}
                                 recipeIngredients={ingredients}
                             />
+                            <div className='card-delete' onClick={handleDeleteRecipe}>
+                            </div>
                         </>
                     )}
                 </Card.Body>

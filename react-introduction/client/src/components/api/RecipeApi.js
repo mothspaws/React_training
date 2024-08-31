@@ -57,4 +57,24 @@ async function updateRecipe(recipeId, recipeData) {
     }
 }
 
-export { getRecipes, createRecipe, updateRecipe };
+// Delete recipe
+async function deleteRecipe(recipeId) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/delete`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id: recipeId }),
+        });
+        if (!response.ok) {
+            throw new Error("Failed to delete recipe");
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error deleting recipe:", error);
+        throw error;
+    }
+}
+
+export { getRecipes, createRecipe, updateRecipe, deleteRecipe };
