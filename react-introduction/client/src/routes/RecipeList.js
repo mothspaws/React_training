@@ -3,24 +3,25 @@ import RecipeBook from '../components/RecipeBook';
 import RecipeTable from '../components/RecipeTable';
 import { getRecipes } from '../components/api/RecipeApi.js';
 import { getIngredients } from '../components/api/IngredientsApi.js';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useContext } from 'react';
 import AddRecipeModal from '../components/AddRecipeModal.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import UserContext from '../components/UserProvider.js';
 
 function RecipeList() {
   // recipes
   const [recipes, setRecipes] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [recipesLoading, setRecipesLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       try {
         const fetchedRecipes = await getRecipes();
         setRecipes(fetchedRecipes);
-        setLoading(false);
+        setRecipesLoading(false);
       } catch (error) {
         console.error("Failed to load recipes", error);
-        setLoading(false);
+        setRecipesLoading(false);
       }
     }
     fetchData();
@@ -28,16 +29,17 @@ function RecipeList() {
 
   // ingredients
   const [ingredients, setIngredients] = useState([]);
+  const [ingredientsLoading, setIngredientsLoading] = useState(true);
 
   useEffect(() => {
       async function fetchData() {
           try {
               const fetchedIngredients = await getIngredients();
               setIngredients(fetchedIngredients);
-              setLoading(false);
+              setIngredientsLoading(false);
           } catch (error) {
               console.error("Failed to load ingredients", error);
-              setLoading(false);
+              setIngredientsLoading(false);
           }
       }
       fetchData();
@@ -71,9 +73,13 @@ function RecipeList() {
   const handleShowAddRecipeModal = () => setShowAddRecipeModal(true);
   const handleCloseAddRecipeModal = () => setShowAddRecipeModal(false);
 
+  // context
+  const { user } = useContext(UserContext);
+  const canCreate = user.role === 'admin' || user.role === 'user';
+
   return (
     <div className="App">
-      {loading ? (
+      {recipesLoading && ingredientsLoading ?(
         <div>Loading...</div>
       ) : (
         <>
@@ -84,9 +90,11 @@ function RecipeList() {
             <button onClick={() => handleViewChange('book')} disabled={viewMode === 'book'}>
               Kniha receptů
             </button>
-            <button onClick={handleShowAddRecipeModal}>
-              Přidat recept
-            </button>
+            {canCreate && (
+              <button onClick={handleShowAddRecipeModal}>
+                Přidat recept
+              </button>
+            )}
             <AddRecipeModal show={showAddRecipeModal} handleClose={handleCloseAddRecipeModal} ingredientsAll={ingredients}/>
           </div>
 

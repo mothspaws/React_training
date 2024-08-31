@@ -3,12 +3,19 @@ import { Card } from "react-bootstrap";
 import RecipeModal from './RecipeModal';
 import { getIngredientById } from './api/IngredientsApi';
 import { deleteRecipe } from './api/RecipeApi.js';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import restaurantImage from '../components/storage/restaurant.png';
 import AddRecipeModal from './AddRecipeModal.js';
+import UserContext from './UserProvider.js';
 
 function RecipeCard({ recipe, size }) {
     const cardClass = `card ${size}`;
+
+    // context
+    const { user } = useContext(UserContext);
+
+    const canEdit = user.role === 'admin';
+    const canDelete = user.role === 'admin';
 
     // zoom
     const [modalShow, setModalShow] = useState(false);
@@ -32,7 +39,6 @@ function RecipeCard({ recipe, size }) {
             console.error("Failed to delete recipe", error);
         }
     }
-
 
     // ingredients
     const [ingredientsAll, setIngredientsAll] = useState([]);
@@ -64,7 +70,7 @@ function RecipeCard({ recipe, size }) {
             }
         }
         fetchData();
-    }, [recipe.ingredients, ingredientsAll]);
+    }, [recipe.ingredients]);
 
     return (
         <>
@@ -90,7 +96,7 @@ function RecipeCard({ recipe, size }) {
                             🔍
                         </div>
                     )}
-                    {size !== 'medium' && (
+                    {size !== 'medium' && canEdit && (
                         <>
                             <div className='card-edit' onClick={handleEditRecipeModal}>
                             </div>
@@ -101,9 +107,11 @@ function RecipeCard({ recipe, size }) {
                                 recipe={recipe}
                                 recipeIngredients={ingredients}
                             />
-                            <div className='card-delete' onClick={handleDeleteRecipe}>
-                            </div>
                         </>
+                    )}
+                    {canDelete && (
+                        <div className='card-delete' onClick={handleDeleteRecipe}>
+                        </div>
                     )}
                 </Card.Body>
             </Card>

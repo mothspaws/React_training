@@ -56,9 +56,4 @@ function RecipeBook({ recipes }) {
     );
 }
 
-RecipeBook.defaultProps = {
-    recipes: [],
-    onZoomClick: () => {},
-};
-
 export default RecipeBook;
