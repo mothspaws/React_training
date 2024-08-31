@@ -528,17 +528,5 @@
       }
     ],
     "id": "e6a2450d6d6cd747"
-  },
-  {
-    "name": "TEST",
-    "description": "<p>kmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdckmdcnkkdcdc</p>",
-    "ingredients": [
-      {
-        "id": "9416b19e1bd2cd11",
-        "amount": 1.1,
-        "unit": "kus"
-      }
-    ],
-    "id": "ca2ee0bb87533e9d"
   }
 ]
