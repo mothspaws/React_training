@@ -11,7 +11,7 @@ function RecipeModal({ show, onHide, recipe, ingredients }) {
                 <Modal.Title>{recipe.name}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <span dangerouslySetInnerHTML={{ __html: recipe.description }} />
+                <span className='card-description' dangerouslySetInnerHTML={{ __html: recipe.description }} />
                 <ul className="card-ingredients">
                     {ingredients.map((ingredient, index) => (
                         <li className="card-ingredient" key={index}>{ingredient.name} {ingredient.amount} {ingredient.unit}</li>
