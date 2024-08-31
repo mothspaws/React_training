@@ -56,8 +56,10 @@ function AddRecipeModal({ show, handleClose, ingredientsAll, recipe, recipeIngre
         try {
             if (isEditMode) {
                 await updateRecipe(recipe.id, recipeData);
+                window.location.reload();
             } else {
                 await createRecipe(recipeData);
+                window.location.reload();
             }
             resetForm();
             handleClose();
@@ -154,14 +156,14 @@ function AddRecipeModal({ show, handleClose, ingredientsAll, recipe, recipeIngre
                         )}
                     </Form.Group>
                     <Row className="mb-2">
-                        <Col md={5}><strong>Ingredience</strong></Col>
+                        <Col md={4}><strong>Ingredience</strong></Col>
                         <Col md={3}><strong>Počet</strong></Col>
-                        <Col md={2}><strong>Jednotka</strong></Col>
+                        <Col md={3}><strong>Jednotka</strong></Col>
                         <Col></Col>
                     </Row>
                     {ingredients.map((ingredient, index) => (
                         <Row key={index} className="mb-3">
-                            <Col md={5}>
+                            <Col md={4}>
                                 <Form.Control
                                     as="select"
                                     value={ingredient.name}
@@ -197,7 +199,7 @@ function AddRecipeModal({ show, handleClose, ingredientsAll, recipe, recipeIngre
                                     </Form.Control.Feedback>
                                 )}
                             </Col>
-                            <Col md={2}>
+                            <Col md={3}>
                                 <Form.Control
                                     type="text"
                                     value={ingredient.unit}
