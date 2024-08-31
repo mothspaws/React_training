@@ -64,7 +64,7 @@ function RecipeList() {
         recipe.description.toLowerCase().includes(searchQuery.toLowerCase())
       );
     });
-  }, [searchQuery]);
+  }, [searchQuery, recipes]);
 
   // modal
   const [showAddRecipeModal, setShowAddRecipeModal] = useState(false);

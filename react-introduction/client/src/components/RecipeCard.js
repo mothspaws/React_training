@@ -4,6 +4,7 @@ import RecipeModal from './RecipeModal';
 import { getIngredientById } from './api/IngredientsApi';
 import { useState, useEffect } from 'react';
 import restaurantImage from '../components/storage/restaurant.png';
+import AddRecipeModal from './AddRecipeModal.js';
 
 function RecipeCard({ recipe, size }) {
     const cardClass = `card ${size}`;
@@ -15,17 +16,26 @@ function RecipeCard({ recipe, size }) {
         setModalShow(true);
     };
 
+    // edit
+    const [editMode, setEditMode] = useState(false);
+
+    const handleEditRecipeModal = () => setEditMode(true);
+    const handleCloseEditRecipeModal = () => setEditMode(false);
+
     // ingredients
+    const [ingredientsAll, setIngredientsAll] = useState([]);
     const [ingredients, setIngredients] = useState([]);
 
     useEffect(() => {
         async function fetchData() {
             try {
                 const fetchedIngredients = await Promise.all(
-                    recipe.ingredients.map(ingredient => 
+                    recipe.ingredients.map(ingredient =>
                         getIngredientById(ingredient.id)
                     )
                 );
+
+                setIngredientsAll(ingredientsAll);
 
                 const combinedIngredients = recipe.ingredients.map((ingredient) => {
                     const fetchedIngredient = fetchedIngredients.find(item => item.id === ingredient.id);
@@ -42,8 +52,8 @@ function RecipeCard({ recipe, size }) {
             }
         }
         fetchData();
-    }, [recipe.ingredients]);
-    
+    }, [recipe.ingredients, ingredientsAll]);
+
     return (
         <>
             <Card className={cardClass}>
@@ -54,19 +64,32 @@ function RecipeCard({ recipe, size }) {
                 <Card.Body className="card-body">
                     <Card.Title className="card-title">{recipe.name}</Card.Title>
                     <Card.Text className="card-text">
-                        <div dangerouslySetInnerHTML={{ __html: recipe.description }} />
+                        <span dangerouslySetInnerHTML={{ __html: recipe.description }} />
                     </Card.Text>
                     {size === 'small' && (
-                            <ul className="card-ingredients">
-                                {ingredients.map((ingredient, index) => (
-                                    <li className="card-ingredient" key={index}>{ingredient.name} {ingredient.amount} {ingredient.unit}</li>
-                                ))}
-                            </ul>
-                        )}
+                        <ul className="card-ingredients">
+                            {ingredients.map((ingredient, index) => (
+                                <li className="card-ingredient" key={index}>{ingredient.name} {ingredient.amount} {ingredient.unit}</li>
+                            ))}
+                        </ul>
+                    )}
                     {size !== 'large' && (
                         <div className="card-zoom" onClick={handleZoomClick}>
                             🔍
                         </div>
+                    )}
+                    {size !== 'medium' && (
+                        <>
+                            <div className='card-edit' onClick={handleEditRecipeModal}>
+                            </div>
+                            <AddRecipeModal
+                                show={editMode}
+                                handleClose={handleCloseEditRecipeModal}
+                                ingredientsAll={ingredientsAll}
+                                recipe={recipe}
+                                recipeIngredients={ingredients}
+                            />
+                        </>
                     )}
                 </Card.Body>
             </Card>

@@ -1,8 +1,4 @@
 import './App.css';
-import RecipeBook from './components/RecipeBook';
-import RecipeTable from './components/RecipeTable';
-import { getRecipes } from './components/api/RecipeApi';
-import { useState, useMemo, useEffect } from 'react';
 import { Outlet, useNavigate } from "react-router-dom";
 import { Navbar, Container, Nav, Offcanvas } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -33,8 +29,7 @@ function App() {
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                   <Nav className="justify-content-end flex-grow-1 pe-3">
-                // Zde bude rozbalovací menu se seznamem tříd
-                    <Nav.Link onClick={() => navigate("/home")}>
+                    <Nav.Link onClick={() => navigate("/")}>
                       Domů
                     </Nav.Link>
                     <Nav.Link onClick={() => navigate("/recipeList")}>
